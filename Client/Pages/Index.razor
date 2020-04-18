@@ -2,54 +2,13 @@
 @using PizzaPlace.Shared
 
 <!--Menu-->
-<h1>Our selection of pizzas</h1>
-@foreach(var pizza in State.Menu.Pizzas)
-{
-    <div class="row">
-        <div class="col">
-            @pizza.Name
-        </div>
-        <div class="col">
-            @pizza.Price
-        </div>
-        <div class="col">
-            <img src="@SpicinessImage(pizza.Spiciness)" alt="@pizza.Spiciness" />
-        </div>
-        <div class="col">
-            <button class="btn btn-success" @onclick="(()=>AddToBasket(pizza))">
-                Add
-            </button>
-        </div>
-    </div>
-}
+
+<PizzaList Title="Our selection of pizzas" Menu="@State.Menu" Selected="((pizza)=>AddToBasket(pizza))"/>
 
 <!--End Menu-->
 <!--Shoping Basket-->
-@if (State.Basket.Orders.Any())
-{
-    <h1>Your current order</h1>
-    @foreach(var (pizza,pos) in State.Basket.Orders.Select((id, pos)=>(State.Menu.GetPizza(id), pos)))
-    {
-        <div class="row">
-            <div class="col">
-                @pizza.Name
-            </div>
-            <div class="col">
-                @pizza.Price
-            </div>
-            <div class="col">
-                <button class="btn btn-danger" @onclick="(()=>RemoveFromBasket(pos))">
-                    Remove
-                </button>
-            </div>
-        </div>
-    }
-    <div class="row">
-        <div class="col"> Total:</div>
-        <div class="col">@State.TotalPrice</div>
-        <div class="col"> </div>
-    </div>
-}
+<ShoppingBasket Title="Your current order" Basket="@State.Basket" GetPizzaFromId="State.Menu.GetPizza"
+                Selected="(pos=>RemoveFromBasket(pos))"/>
 <!--End shoping basket-->
 <!--Customer entry-->
 <h1>Please enter your details below</h1>
@@ -126,12 +85,14 @@ Welcome to your new app.
     {
         Console.WriteLine($"Added pizza {pizza.Name}");
         State.Basket.Add(pizza.Id);
+        StateHasChanged();
     }
 
     private void RemoveFromBasket(int pos)
     {
         Console.WriteLine($"Removing pizza at pos {pos}");
         State.Basket.RemoveAt(pos);
+        StateHasChanged();
     }
 
     private void PlaceOrder()

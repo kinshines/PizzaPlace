@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaPlace.Server", "Server\PizzaPlace.Server.csproj", "{1450A3DD-DECD-4619-AE49-981E302FCB30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaPlace.Server", "Server\PizzaPlace.Server.csproj", "{1450A3DD-DECD-4619-AE49-981E302FCB30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaPlace.Client", "Client\PizzaPlace.Client.csproj", "{67415A73-D8A2-44D5-BD4C-EC155599F125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaPlace.Client", "Client\PizzaPlace.Client.csproj", "{67415A73-D8A2-44D5-BD4C-EC155599F125}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaPlace.Shared", "Shared\PizzaPlace.Shared.csproj", "{C2E0EFA0-58C3-4089-851E-E29B2DBCBCB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaPlace.Shared", "Shared\PizzaPlace.Shared.csproj", "{C2E0EFA0-58C3-4089-851E-E29B2DBCBCB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
