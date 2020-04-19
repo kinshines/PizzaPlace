@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using PizzaPlace.Shared
+@inject IMenuService menuService;
+@inject IOrderService orderService;
 
 <!--Menu-->
 
@@ -11,7 +13,7 @@
                 Selected="(pos=>RemoveFromBasket(pos))"/>
 <!--End shoping basket-->
 <!--Customer entry-->
-<CustomerEntry Title="Please enter your details below" Customer="State.Basket.Customer" Submit="@((_)=>PlaceOrder())" />
+<CustomerEntry Title="Please enter your details below" Customer="State.Basket.Customer" Submit="@(async (_)=>await PlaceOrder())" />
 <!--End customer entry-->
 <p>@State.ToJson()</p>
 
@@ -20,18 +22,14 @@ Welcome to your new app.
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 @code{
-    private State State { get; } = new State()
+    private State State { get; } = new State();
+
+    protected override async Task OnInitializedAsync()
     {
-        Menu = new Menu
-        {
-            Pizzas = new List<Pizza>
-            {
-                new Pizza(1,"Pepperoni",8.99M,Spiciness.Spicy),
-                new Pizza(2,"Margarita",7.99M,Spiciness.None),
-                new Pizza(3,"Diabolo",9.99M,Spiciness.Hot)
-            }
-        }
-    };
+        State.Menu = await menuService.GetMenu();
+        this.State.Basket.Customer.PropertyChanged +=
+        (sender, e) => this.StateHasChanged();
+    }
 
     private string SpicinessImage(Spiciness spiciness)
     {
@@ -52,15 +50,9 @@ Welcome to your new app.
         StateHasChanged();
     }
 
-    private void PlaceOrder()
+    private async Task PlaceOrder()
     {
-        Console.WriteLine($"Place order {State.Basket.Customer.ToJson()}");
+        await orderService.PlaceOrder(State.Basket);
     }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        this.State.Basket.Customer.PropertyChanged +=
-        (sender, e) => this.StateHasChanged();
-    }
 }
