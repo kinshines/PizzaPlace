@@ -17,7 +17,7 @@ namespace PizzaPlace.Client.Services
         }
         public async Task<Menu> GetMenu()
         {
-            var pizzas = await httpClient.GetJsonAsync<Pizza[]>("/pizzas");
+            var pizzas = await httpClient.GetJsonAsync<Pizza[]>("/api/pizzas/pizzas");
             return new Menu() { Pizzas = pizzas.ToList() };
         }
     }

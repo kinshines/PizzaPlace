@@ -14,7 +14,6 @@ namespace PizzaPlace.Shared
     {
         public Pizza()
         {
-            PizzaOrders = new List<PizzaOrder>();
         }
         public Pizza(int id,string name,decimal price,Spiciness spiciness)
         {
