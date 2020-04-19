@@ -2,20 +2,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace PizzaPlace.Shared
 {
-    public class Customer : INotifyDataErrorInfo
+    public class Customer : INotifyDataErrorInfo,INotifyPropertyChanged
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
+
+        private string name;
+        public string Name 
+        {
+            get { return name; }
+            set { name = value; OnPropertyChanged(); }
+        }
+
+        private string street;
+        public string Street 
+        {
+            get { return street; }
+            set { street = value; OnPropertyChanged(); } 
+        }
+        private string city;
+        public string City 
+        {
+            get { return city; }
+            set { city = value;OnPropertyChanged();}
+        }
 
         public bool HasErrors => GetErrors(string.Empty).Any();
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public IEnumerable GetErrors(string propertyName)
         {
@@ -46,6 +65,11 @@ namespace PizzaPlace.Shared
                     yield return $"{propertyName} is mandatory";
                 }
             }
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

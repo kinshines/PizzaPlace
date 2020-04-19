@@ -11,50 +11,7 @@
                 Selected="(pos=>RemoveFromBasket(pos))"/>
 <!--End shoping basket-->
 <!--Customer entry-->
-<h1>Please enter your details below</h1>
-<fieldset>
-    <p>
-        <label for="name">Name:</label>
-        <input id="name" @bind="State.Basket.Customer.Name" />
-        @if (State.Basket.Customer.GetErrors(nameof(Customer.Name)).Any())
-        {
-            <ul class="validation-error">
-                @foreach(string error in State.Basket.Customer.GetErrors(nameof(Customer.Name)))
-                {
-                    <li>@error</li>
-                }
-            </ul>
-        }
-    </p>
-    <p>
-        <label for="street">Street:</label>
-        <input id="street" @bind="State.Basket.Customer.Street" />
-        @if (State.Basket.Customer.GetErrors(nameof(Customer.Street)).Any())
-        {
-            <ul class="validation-error">
-                @foreach (string error in State.Basket.Customer.GetErrors(nameof(Customer.Street)))
-                {
-                    <li>@error</li>
-                }
-            </ul>
-        }
-    </p>
-    <p>
-        <label for="city">City:</label>
-        <input id="city" @bind="State.Basket.Customer.City" />
-        @if (State.Basket.Customer.GetErrors(nameof(Customer.City)).Any())
-        {
-            <ul class="validation-error">
-                @foreach (string error in State.Basket.Customer.GetErrors(nameof(Customer.City)))
-                {
-                    <li>@error</li>
-                }
-            </ul>
-        }
-    </p>
-
-    <button @onclick="PlaceOrder" disabled="@State.Basket.Customer.HasErrors">Checkout</button>
-</fieldset>
+<CustomerEntry Title="Please enter your details below" Customer="State.Basket.Customer" Submit="@((_)=>PlaceOrder())" />
 <!--End customer entry-->
 <p>@State.ToJson()</p>
 
@@ -97,6 +54,13 @@ Welcome to your new app.
 
     private void PlaceOrder()
     {
-        Console.WriteLine("Place order");
+        Console.WriteLine($"Place order {State.Basket.Customer.ToJson()}");
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.State.Basket.Customer.PropertyChanged +=
+        (sender, e) => this.StateHasChanged();
     }
 }
