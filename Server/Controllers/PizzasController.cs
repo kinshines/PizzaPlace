@@ -8,7 +8,6 @@ using PizzaPlace.Shared;
 
 namespace PizzaPlace.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class PizzasController : ControllerBase
     {
@@ -19,9 +18,9 @@ namespace PizzaPlace.Server.Controllers
         }
 
         [HttpGet("pizzas")]
-        public IQueryable<Pizza> GetPizzas()
+        public Pizza[] GetPizzas()
         {
-            return db.Pizzas;
+            return db.Pizzas.ToArray();
         }
 
         [HttpPost("pizzas")]

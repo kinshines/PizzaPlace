@@ -14,6 +14,7 @@ namespace PizzaPlace.Shared
     {
         public Pizza()
         {
+            PizzaOrders = new List<PizzaOrder>();
         }
         public Pizza(int id,string name,decimal price,Spiciness spiciness)
         {
@@ -28,5 +29,6 @@ namespace PizzaPlace.Shared
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Spiciness Spiciness { get; set; }
+        public List<PizzaOrder> PizzaOrders { get; set; }
     }
 }

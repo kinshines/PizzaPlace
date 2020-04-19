@@ -71,5 +71,7 @@ namespace PizzaPlace.Shared
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public Order Order { get; set; }
     }
 }
