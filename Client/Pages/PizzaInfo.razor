@@ -1,0 +1,33 @@
+﻿@using PizzaPlace.Shared
+@page "/PizzaInfo"
+@inject State State
+
+<h2>Pizza Details</h2>
+<div class="row">
+    <div class="col">
+        @State.CurrentPizza.Name
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        @State.CurrentPizza.Price
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <img src="@SpicinessImage(State.CurrentPizza.Spiciness)" alt="@State.CurrentPizza.Spiciness" />
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" href="/">Menu</a>
+    </div>
+</div>
+
+@code {
+
+    private string SpicinessImage(Spiciness spiciness)
+    {
+        return $"images/{spiciness.ToString().ToLower()}.png";
+    }
+}

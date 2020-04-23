@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaPlace.Client", "Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaPlace.Shared", "Shared\PizzaPlace.Shared.csproj", "{C2E0EFA0-58C3-4089-851E-E29B2DBCBCB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaPlace.Extensions.Validation", "PizzaPlace.Extensions.Validation\PizzaPlace.Extensions.Validation.csproj", "{F59F8ED0-7041-4B4E-9D5B-56B663942AF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaPlace.Extensions.Validation", "PizzaPlace.Extensions.Validation\PizzaPlace.Extensions.Validation.csproj", "{F59F8ED0-7041-4B4E-9D5B-56B663942AF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

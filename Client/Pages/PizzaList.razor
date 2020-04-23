@@ -17,7 +17,8 @@ else
 {
     @foreach (var pizza in Menu.Pizzas)
     {
-        <PizzaItem Pizza="pizza" ButtonTitle="Order" ButtonClass="btn btn-success" Selected="((p)=>Selected(p))" />
+        <PizzaItem Pizza="pizza" ButtonTitle="Order" ButtonClass="btn btn-success" Selected="((p)=>Selected(p))" 
+                   ShowPizzaInformation="@ShowPizzaInformation"/>
     }
 }
 
@@ -32,5 +33,7 @@ else
     [Parameter]
     public Action<Pizza> Selected { get; set; }
 
+    [Parameter]
+    public Action<Pizza> ShowPizzaInformation { get; set; }
 
 }

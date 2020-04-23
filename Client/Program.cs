@@ -19,6 +19,7 @@ namespace PizzaPlace.Client
             builder.Services.AddBaseAddressHttpClient();
             builder.Services.AddTransient<IMenuService, MenuService>();
             builder.Services.AddTransient<IOrderService, OrderService>();
+            builder.Services.AddSingleton<State>();
 
             await builder.Build().RunAsync();
         }

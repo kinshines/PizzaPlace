@@ -1,11 +1,13 @@
 ﻿@page "/"
 @using PizzaPlace.Shared
-@inject IMenuService menuService;
-@inject IOrderService orderService;
+@inject IMenuService menuService
+@inject IOrderService orderService
+@inject State State
+@inject NavigationManager NavigationManager
 
 <!--Menu-->
 
-<PizzaList Title="Our selection of pizzas" Menu="@State.Menu" Selected="((pizza)=>AddToBasket(pizza))"/>
+<PizzaList Title="Our selection of pizzas" Menu="@State.Menu" Selected="((pizza)=>AddToBasket(pizza))" ShowPizzaInformation="((pizza)=>ShowPizzaInformation(pizza))"/>
 
 <!--End Menu-->
 <!--Shoping Basket-->
@@ -22,7 +24,7 @@ Welcome to your new app.
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 @code{
-    private State State { get; } = new State();
+    //private State State { get; } = new State();
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,4 +57,9 @@ Welcome to your new app.
         await orderService.PlaceOrder(State.Basket);
     }
 
+    private void ShowPizzaInformation(Pizza pizza)
+    {
+        State.CurrentPizza = pizza;
+        NavigationManager.NavigateTo("/PizzaInfo");
+    }
 }
