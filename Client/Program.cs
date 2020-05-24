@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using PizzaPlace.Shared;
 using PizzaPlace.Client.Services;
+using System.Net.Http;
 
 namespace PizzaPlace.Client
 {
@@ -16,7 +17,7 @@ namespace PizzaPlace.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddTransient<IMenuService, MenuService>();
             builder.Services.AddTransient<IOrderService, OrderService>();
             builder.Services.AddSingleton<State>();
